@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite):
 
         # Create an image of the block, and fill it with a color.
         # This could also be an image loaded from the disk.
-        self.image = pygame.image.load("resources/test2.jpg")
+        self.image = pygame.image.load("resources/scientist.png")
 
         # Set a reference to the image rect.
         self.rect = self.image.get_rect()
