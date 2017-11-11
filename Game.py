@@ -57,7 +57,7 @@ def run():
                 if event.key == pygame.K_UP:
                     player.jump()
                 if event.key == pygame.K_r:
-                    clones.append([player.width(), player.height(), player.rect.x, player.rect.y])
+                    clones.append([player.width(), player.height(), -current_level.world_shift + player.rect.x, player.rect.y])
                     current_level.reset(clones)
                 if event.key == pygame.K_ESCAPE:
                     clones.clear()
@@ -74,6 +74,20 @@ def run():
 
         # Update items in the level
         current_level.update()
+
+        left_scroll = SCREEN_WIDTH * .4
+        right_scroll = SCREEN_WIDTH * .6
+        # If the player gets near the right side, shift the world left (-x)
+        if player.rect.right >= right_scroll:
+            diff = player.rect.right - right_scroll
+            player.rect.right = right_scroll
+            current_level.shift_world(-diff)
+
+        # If the player gets near the left side, shift the world right (+x)
+        if player.rect.left <= left_scroll:
+            diff = left_scroll - player.rect.left
+            player.rect.left = left_scroll
+            current_level.shift_world(diff)
 
         # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         current_level.draw(screen)

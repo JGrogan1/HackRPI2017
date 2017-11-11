@@ -28,13 +28,6 @@ class Player(pygame.sprite.Sprite):
         self.lives = 0
 
     def update(self):
-        # If the player gets near the right side, shift the world left (-x)
-        if self.rect.right > Game.SCREEN_WIDTH:
-            self.rect.right = Game.SCREEN_WIDTH
-
-        # If the player gets near the left side, shift the world right (+x)
-        if self.rect.left < 0:
-            self.rect.left = 0
         """ Move the player. """
         # Gravity
         self.calc_grav()

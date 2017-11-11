@@ -19,6 +19,8 @@ class Level(object):
         self.background = pygame.image.load("resources/test.jpg")
         self.rect = self.background.get_rect()
 
+        self.world_shift = 0
+
     # Update everything on this level
     def update(self):
         """ Update everything in this level."""
@@ -47,6 +49,21 @@ class Level(object):
 
     def full_reset(self):
         self.__init__(self.player)
+
+    def shift_world(self, shift_x):
+        """ When the user moves left/right and we need to scroll
+        everything: """
+
+        # Keep track of the shift amount
+        self.world_shift += shift_x
+
+        # Go through all the sprite lists and shift
+        for platform in self.platform_list:
+            platform.rect.x += shift_x
+
+        for button in self.button_list:
+            button.rect.x += shift_x
+
 
 # Create platforms for the level
 class Level_01(Level):
