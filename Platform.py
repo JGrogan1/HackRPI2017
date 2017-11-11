@@ -1,6 +1,5 @@
 import pygame
-
-GREEN = (0, 255, 0)
+import Game
 
 class Platform(pygame.sprite.Sprite):
     """ Platform the user can jump on """
@@ -12,6 +11,6 @@ class Platform(pygame.sprite.Sprite):
         super().__init__()
 
         self.image = pygame.Surface([width, height])
-        self.image.fill(GREEN)
+        self.image.fill(Game.GREEN)
 
         self.rect = self.image.get_rect()

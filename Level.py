@@ -1,8 +1,6 @@
 import pygame
 import Platform as plat
-
-BLUE = (0, 0, 255)
-
+import Game
 
 class Level(object):
     """ This is a generic super-class used to define a level.
@@ -29,7 +27,7 @@ class Level(object):
         """ Draw everything on this level. """
 
         # Draw the background
-        screen.fill(BLUE)
+        screen.fill(Game.BLUE)
 
         # Draw all the sprite lists that we have
         self.platform_list.draw(screen)
