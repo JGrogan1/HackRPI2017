@@ -1,5 +1,6 @@
 import pygame
 import Platform as plat
+import Game
 
 class Level(object):
     """ This is a generic super-class used to define a level.
@@ -49,6 +50,9 @@ class Level_01(Level):
                  [210, 70, 200, 400],
                  [210, 70, 600, 300],
                  ]
+
+        player.rect.x = 340
+        player.rect.y = Game.SCREEN_HEIGHT - player.rect.height
 
         # Go through the array above and add platforms
         for platform in level:

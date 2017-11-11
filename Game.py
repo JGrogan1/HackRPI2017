@@ -3,11 +3,7 @@ import Level as lvl
 import Player as pl
 
 # Colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-BLUE = (0, 0, 255)
 
 # Screen dimensions
 SCREEN_WIDTH = 1280
@@ -18,8 +14,7 @@ def main():
     pygame.init()
 
     # Set the height and width of the screen
-    size = [SCREEN_WIDTH, SCREEN_HEIGHT]
-    screen = pygame.display.set_mode(size)
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     pygame.display.set_caption("Platformer Jumper")
 
@@ -31,14 +26,10 @@ def main():
     level_list.append(lvl.Level_01(player))
 
     # Set the current level
-    current_level_no = 0
-    current_level = level_list[current_level_no]
+    current_level = level_list[0]
 
     active_sprite_list = pygame.sprite.Group()
     player.level = current_level
-
-    player.rect.x = 340
-    player.rect.y = SCREEN_HEIGHT - player.rect.height
     active_sprite_list.add(player)
 
     # Loop until the user clicks the close button.
@@ -72,14 +63,6 @@ def main():
 
         # Update items in the level
         current_level.update()
-
-        # If the player gets near the right side, shift the world left (-x)
-        if player.rect.right > SCREEN_WIDTH:
-            player.rect.right = SCREEN_WIDTH
-
-        # If the player gets near the left side, shift the world right (+x)
-        if player.rect.left < 0:
-            player.rect.left = 0
 
         # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         current_level.draw(screen)
