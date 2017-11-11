@@ -4,12 +4,14 @@ import Player as pl
 
 # Colors
 GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+PINK = (255,192,203)
 
 # Screen dimensions
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 
-def main():
+def run():
     """ Main Program """
     pygame.init()
 
@@ -38,6 +40,9 @@ def main():
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
 
+    # All clones
+    clones = []
+
     # -------- Main Program Loop -----------
     while not done:
         for event in pygame.event.get():
@@ -51,6 +56,12 @@ def main():
                     player.go_right()
                 if event.key == pygame.K_UP:
                     player.jump()
+                if event.key == pygame.K_r:
+                    clones.append([player.width(), player.height(), player.rect.x, player.rect.y])
+                    current_level.reset(clones)
+                if event.key == pygame.K_ESCAPE:
+                    clones.clear()
+                    current_level.full_reset()
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT and player.change_x < 0:

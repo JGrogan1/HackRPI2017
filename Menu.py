@@ -1,14 +1,12 @@
 import pygame
-
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
+import Game
 
 def main():
     """ Main Program """
     pygame.init()
 
     # Set the height and width of the screen
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    screen = pygame.display.set_mode((Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT))
 
     pygame.display.set_caption("Platformer Jumper")
 
@@ -18,8 +16,8 @@ def main():
     start_img = pygame.image.load("resources/start_game.png")
     settings_img = pygame.image.load("resources/settings.png")
 
-    start_button = screen.blit(start_img, (33, SCREEN_HEIGHT / 2))
-    settings_button = screen.blit(settings_img, (SCREEN_WIDTH - 33 - 600, SCREEN_HEIGHT / 2))
+    start_button = screen.blit(start_img, (33, Game.SCREEN_HEIGHT / 2))
+    settings_button = screen.blit(settings_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2))
 
     end_it = False
     proceed_to_game = False
@@ -41,7 +39,7 @@ def main():
     if proceed_to_game:
         proceed_to_game = False
         print ("Clicked start button!")
-        """GO TO GAME"""
+        Game.run()
     if go_to_settings:
         go_to_settings = False
         print ("Clicked settings button!")

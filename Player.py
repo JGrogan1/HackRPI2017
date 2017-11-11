@@ -25,6 +25,7 @@ class Player(pygame.sprite.Sprite):
 
         # List of sprites we can bump against
         self.level = None
+        self.lives = 0
 
     def update(self):
         # If the player gets near the right side, shift the world left (-x)
@@ -106,3 +107,9 @@ class Player(pygame.sprite.Sprite):
     def stop(self):
         """ Called when the user lets off the keyboard. """
         self.change_x = 0
+
+    def width(self):
+        return self.image.get_rect().size[0]
+
+    def height(self):
+        return self.image.get_rect().size[1]
