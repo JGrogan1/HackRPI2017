@@ -5,7 +5,8 @@ import Player as pl
 # Colors
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-PINK = (255,192,203)
+PINK = (255, 192, 203)
+GRAY = (128, 128, 128)
 
 # Screen dimensions
 SCREEN_WIDTH = 1280
@@ -82,6 +83,13 @@ def run():
 
         # Update the player.
         active_sprite_list.update()
+
+        spikes = pygame.sprite.spritecollide(player, current_level.spike_list, False)
+        if len(spikes) > 0:
+            player.reverse_gravity = False
+            player.image = pygame.image.load("resources/scientist.png")
+            clones.clear()
+            current_level.full_reset()
 
         # Update items in the level
         current_level.update()

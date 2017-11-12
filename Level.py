@@ -13,6 +13,7 @@ class Level(object):
             collide with the player. """
         self.platform_list = pygame.sprite.Group()
         self.button_list = pygame.sprite.Group()
+        self.spike_list = pygame.sprite.Group()
         self.player = player
 
         # Background image
@@ -28,6 +29,7 @@ class Level(object):
             button.update()
         self.button_list.update()
         self.platform_list.update()
+        self.spike_list.update()
 
     def draw(self, screen):
         """ Draw everything on this level. """
@@ -38,6 +40,7 @@ class Level(object):
         # Draw all the sprite lists that we have
         self.platform_list.draw(screen)
         self.button_list.draw(screen)
+        self.spike_list.draw(screen)
 
     def reset(self, clones):
         lives = self.player.lives
@@ -63,6 +66,9 @@ class Level(object):
         for button in self.button_list:
             button.rect.x += shift_x
 
+        for spike in self.spike_list:
+            spike.rect.x += shift_x
+
 
 # Create platforms for the level
 class Level_01(Level):
@@ -75,12 +81,16 @@ class Level_01(Level):
         Level.__init__(self, player)
 
         # Array with width, height, x, and y of platform
-        level = [[210, 70, 0, 600],
+        platforms = [[210, 70, 0, 600],
                  [210, 70, 200, 400],
                  [210, 70, 600, 300],
                  [210, 70, 800, 600]]
 
-        buttons = [([50, 580], level[3]), ([200, 400], level[2])]
+        buttons = [([50, 580], platforms[3]),
+                ([200, 400], platforms[2])]
+
+        spikes = [[95, 50, 600, 250],
+                  [95, 50, 700, 250]]
 
         player.rect.x = 340
         player.rect.y = Game.SCREEN_HEIGHT - player.rect.height
@@ -92,14 +102,13 @@ class Level_01(Level):
             block = plat.Platform(platform[0], platform[1])
             block.rect.x = platform[2]
             block.rect.y = platform[3]
-            block.player = self.player
             clone_list.add(block)
         pygame.sprite.spritecollide(self.player, clone_list, True)
         for clone in clone_list:
             self.platform_list.add(clone)
 
         # Go through the array above and add platforms
-        for platform in level:
+        for platform in platforms:
             block = plat.Platform(platform[0], platform[1])
             block.rect.x = platform[2]
             block.rect.y = platform[3]
@@ -110,3 +119,11 @@ class Level_01(Level):
                     but.rect.x = button[0][0]
                     but.rect.y = button[0][1]
                     self.button_list.add(but)
+
+        for spike in spikes:
+            block = plat.Platform(spike[0], spike[1])
+            block.image.fill(Game.GRAY)
+            block.rect.x = spike[2]
+            block.rect.y = spike[3]
+            block.player = self.player
+            self.spike_list.add(block)
