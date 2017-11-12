@@ -16,7 +16,6 @@ class Player(pygame.sprite.Sprite):
 
         # Create an image of the block, and fill it with a color.
         # This could also be an image loaded from the disk.
-        # TODO: fix the params for this
         self.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
         self.left_anim = Animation("resources/walking_left.png", 60, 100, 6, 6)
         self.current_anim = self.right_anim
@@ -104,19 +103,19 @@ class Player(pygame.sprite.Sprite):
                 self.change_y = 1
             else:
                 self.change_y += .35
-            # See if we are on the ground.
-            if self.rect.y >= Game.SCREEN_HEIGHT - self.rect.height and self.change_y >= 0:
-                self.change_y = 0
-                self.rect.y = Game.SCREEN_HEIGHT - self.rect.height
         else:
             if self.change_y == 0:
                 self.change_y = -1
             else:
                 self.change_y -= .35
-            # See if we are on the ceiling.
-            if self.rect.y <= 0 and self.change_y <= 0:
-                self.change_y = 0
-                self.rect.y = 0
+        # See if we are on the ground.
+        if self.rect.y >= Game.SCREEN_HEIGHT - self.rect.height and self.change_y >= 0:
+            self.change_y = 0
+            self.rect.y = Game.SCREEN_HEIGHT - self.rect.height
+        # See if we are on the ceiling.
+        if self.rect.y <= 0 and self.change_y <= 0:
+            self.change_y = 0
+            self.rect.y = 0
 
     def jump(self):
         """ Called when user hits 'jump' button. """
