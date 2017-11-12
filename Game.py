@@ -87,9 +87,9 @@ def run():
                     player.reverse_gravity = True
                     player.set_animation_gravity()
 
-            if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0,0)) or (event.type == pygame.KEYUP and event.key == pygame.K_LEFT):
+            if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0,0)) or (event.type == pygame.KEYUP and event.key == pygame.K_LEFT and player.change_x < 0):
                 player.stop()
-            if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0,0)) or (event.type == pygame.KEYUP and event.key == pygame.K_RIGHT):
+            if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0,0)) or (event.type == pygame.KEYUP and event.key == pygame.K_RIGHT and player.change_x > 0):
                 player.stop()
             if (event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(7)) or (event.type == pygame.KEYUP and event.key == pygame.K_p):
                 player.stop()
