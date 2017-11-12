@@ -68,7 +68,7 @@ def run():
                 if event.key == pygame.K_r:
                     player.reverse_gravity = False
                     player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-                    player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+                    player.left_anim = Animation("resources/walking_left.png", 60, 100, 6, 6)
                     player.current_anim = player.right_anim
                     player.image = player.current_anim.get_current_frame()
                     clones.append([player.width(), player.height(), -current_level.world_shift + player.rect.x, player.rect.y])
@@ -76,7 +76,7 @@ def run():
                 if event.key == pygame.K_ESCAPE:
                     player.reverse_gravity = False
                     player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-                    player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+                    player.left_anim = Animation("resources/walking_left.png", 60, 100, 6, 6)
                     player.current_anim = player.right_anim
                     player.image = player.current_anim.get_current_frame()
                     clones.clear()
@@ -85,13 +85,13 @@ def run():
                     if player.reverse_gravity:
                         player.reverse_gravity = False
                         player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-                        player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+                        player.left_anim = Animation("resources/walking_left.png", 60, 100, 6, 6)
                         player.current_anim = player.right_anim
                         player.image = player.current_anim.get_current_frame()
                     else:
                         player.reverse_gravity = True
                         player.right_anim = Animation("resources/upside_down_walking.png", 60, 100, 6, 6)
-                        player.left_anim = Animation("resources/upside_down_walking.png", 60, 100, 6, 6)
+                        player.left_anim = Animation("resources/upside_down_walking_left.png", 60, 100, 6, 6)
                         player.current_anim = player.right_anim
                         player.image = player.current_anim.get_current_frame()
 
@@ -111,7 +111,7 @@ def run():
         if len(spikes) > 0:
             player.reverse_gravity = False
             player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-            player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+            player.left_anim = Animation("resources/walking_left.png", 60, 100, 6, 6)
             player.current_anim = player.right_anim
             player.image = player.current_anim.get_current_frame()
             clones.clear()
@@ -121,7 +121,7 @@ def run():
         if len(goals) > 0:
             player.reverse_gravity = False
             player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-            player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+            player.left_anim = Animation("resources/walking_left.png", 60, 100, 6, 6)
             player.current_anim = player.right_anim
             player.image = player.current_anim.get_current_frame()
             clones.clear()
