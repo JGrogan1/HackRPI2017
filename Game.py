@@ -16,6 +16,7 @@ YELLOW = (255, 255, 0)
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 
+
 def run():
     """ Main Program """
     pygame.init()
@@ -28,9 +29,9 @@ def run():
 
     # Create all the levels
     level_list = []
-    level_list.append(lvl.Level_01(player))
-    level_list.append(lvl.Level_02(player))
-    level_list.append(lvl.Level_03(player))
+    level_list.append(lvl.Level01(player))
+    level_list.append(lvl.Level02(player))
+    level_list.append(lvl.Level03(player))
 
     # Set the current level
     current_level_number = 0

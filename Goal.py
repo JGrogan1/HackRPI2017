@@ -1,6 +1,7 @@
 import pygame
 import Game
 
+
 class Goal(pygame.sprite.Sprite):
 
     """ Platform the user can jump on """

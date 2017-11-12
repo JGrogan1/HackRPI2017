@@ -2,6 +2,7 @@ import pygame
 import Game
 from Animation import *
 
+
 class Player(pygame.sprite.Sprite):
     """ This class represents the bar at the bottom that the player
         controls. """

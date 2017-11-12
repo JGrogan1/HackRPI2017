@@ -3,6 +3,7 @@ import Game
 import Settings
 from Music import Music
 
+
 def main(musicVol):
     """ Main Program """
     pygame.mixer.pre_init(44100, 16, 2, 4096)
@@ -13,7 +14,6 @@ def main(musicVol):
 
     pygame.display.set_caption("The Adventures of The Evil Mad Scientist: Dr. Citizano")
 
-    # screen.blit(pygame.font.SysFont("Comic Sans MS", 40).render("Welcome Citizano!", 1, (255, 0, 0)), (200, 200))
     background_img = pygame.image.load("resources/title.png").convert()
     start_img = pygame.image.load("resources/playButton.png").convert()
     settings_img = pygame.image.load("resources/settingsButton.png").convert()
@@ -22,14 +22,14 @@ def main(musicVol):
     arrow_img.set_colorkey((255,0,255))
     arrow_coverup_img = pygame.image.load("resources/buttonCover.png").convert()
 
-    bg = screen.blit(background_img, (0, 0))
+    screen.blit(background_img, (0, 0))
     start_button = screen.blit(start_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2))
     settings_button = screen.blit(settings_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2 + 125))
     exit_button = screen.blit(exit_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2 + 250))
-    arrow = screen.blit(arrow_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2))
+    screen.blit(arrow_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2))
 
 
-    bgm = Music(musicVol)
+    Music(musicVol)
 
     joysticks = []
     for i in range(0, pygame.joystick.get_count()):
@@ -60,10 +60,10 @@ def main(musicVol):
                     exit_game = True
 
             if event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0, 1):
-                if(menu_selector > 0):
+                if menu_selector > 0:
                     menu_selector -= 1
             if event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0, -1):
-                if(menu_selector < 2):
+                if menu_selector < 2:
                     menu_selector += 1
 
             if menu_selector == 0:
@@ -93,18 +93,16 @@ def main(musicVol):
         pygame.display.flip()
 
     if continue_to_start:
-        continue_to_start = False
         print("Clicked start button!")
         Game.run()
     if continue_to_settings:
-        continue_to_settings = False
         print("Clicked settings button!")
         Settings.run()
     if exit_game:
-        exit_game = False
         print("Goodbye!")
 
     pygame.quit()
+
 
 if __name__ == "__main__":
     main(.1)

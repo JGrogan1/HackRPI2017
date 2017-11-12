@@ -1,6 +1,7 @@
 import pygame
 from SpriteSheet import *
 
+
 class Animation(object):
     def __init__(self, name, sprite_width, sprite_height, num_frames, delay):
         self.sheet = SpriteSheet(name, sprite_width, sprite_height)
@@ -20,7 +21,7 @@ class Animation(object):
         if self.current_tick >= self.delay:
             self.current_tick = 0
             self.frame_index = (self.frame_index + 1) % self.num_frames
-            self.current_frame = self.frames[ self.frame_index ]
+            self.current_frame = self.frames[self.frame_index]
 
     def get_current_frame(self):
         return self.current_frame

@@ -6,6 +6,7 @@ import Button as bt
 import Goal as gl
 import Game
 
+
 class Level(object):
     """ This is a generic super-class used to define a level.
         Create a child class for each level with level-specific
@@ -89,7 +90,7 @@ class Level(object):
         # Adds clones that aren't part of the spawn point as platforms
         clone_list = pygame.sprite.Group()
         for platform in clones:
-            block = Clone.Clone(platform[0], platform[1])
+            block = Clone.Clone()
             block.rect.x = platform[2]
             block.rect.y = platform[3]
             clone_list.add(block)
@@ -122,8 +123,9 @@ class Level(object):
             block.rect.y = goal[3]
             self.goal_list.add(block)
 
+
 # Create platforms for the level
-class Level_01(Level):
+class Level01(Level):
     """ Definition for level 1. """
 
     def __init__(self, player, clones=[]):
@@ -159,7 +161,8 @@ class Level_01(Level):
 
         Level.create(self, platforms, buttons, spikes, goal, clones)
 
-class Level_02(Level):
+
+class Level02(Level):
     """ Definition for level 2. """
 
     def __init__(self, player, clones=[]):
@@ -189,7 +192,8 @@ class Level_02(Level):
 
         Level.create(self, platforms, [], spikes, goal, clones)  # no buttons
 
-class Level_03(Level):
+
+class Level03(Level):
     """ Definition for level 3. """
 
     def __init__(self, player, clones=[]):

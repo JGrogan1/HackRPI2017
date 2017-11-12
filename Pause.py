@@ -2,6 +2,7 @@ import pygame
 import Menu
 import Game
 
+
 def run():
     pygame.init()
     pygame.display.set_caption("Pause")

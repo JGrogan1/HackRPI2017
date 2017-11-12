@@ -2,10 +2,11 @@ import pygame
 import Game
 from Animation import *
 
+
 class Clone(pygame.sprite.Sprite):
     """ Platform the user can jump on """
 
-    def __init__(self, width, height):
+    def __init__(self):
         """ Platform constructor. Assumes constructed with user passing in
             an array of 5 numbers like what's defined at the top of this
             code. """
