@@ -26,6 +26,7 @@ class Player(pygame.sprite.Sprite):
         # List of sprites we can bump against
         self.level = None
         self.lives = 0
+        self.reverse_gravity = False
 
     def update(self):
         """ Move the player. """
@@ -52,27 +53,42 @@ class Player(pygame.sprite.Sprite):
         # Check and see if we hit anything
         block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
         for block in block_hit_list:
-
-            # Reset our position based on the top/bottom of the object.
-            if self.change_y > 0:
-                self.rect.bottom = block.rect.top
-            elif self.change_y < 0:
-                self.rect.top = block.rect.bottom
+            if not self.reverse_gravity:
+                # Reset our position based on the top/bottom of the object.
+                if self.change_y > 0:
+                    self.rect.bottom = block.rect.top
+                elif self.change_y < 0:
+                    self.rect.top = block.rect.bottom
+            else:
+                # Reset our position based on the top/bottom of the object.
+                if self.change_y < 0:
+                    self.rect.top = block.rect.bottom
+                elif self.change_y > 0:
+                    self.rect.bottom = block.rect.top
 
             # Stop our vertical movement
             self.change_y = 0
 
     def calc_grav(self):
         """ Calculate effect of gravity. """
-        if self.change_y == 0:
-            self.change_y = 1
+        if not self.reverse_gravity:
+            if self.change_y == 0:
+                self.change_y = 1
+            else:
+                self.change_y += .35
+            # See if we are on the ground.
+            if self.rect.y >= Game.SCREEN_HEIGHT - self.rect.height and self.change_y >= 0:
+                self.change_y = 0
+                self.rect.y = Game.SCREEN_HEIGHT - self.rect.height
         else:
-            self.change_y += .35
-
-        # See if we are on the ground.
-        if self.rect.y >= Game.SCREEN_HEIGHT - self.rect.height and self.change_y >= 0:
-            self.change_y = 0
-            self.rect.y = Game.SCREEN_HEIGHT - self.rect.height
+            if self.change_y == 0:
+                self.change_y = -1
+            else:
+                self.change_y -= .35
+            # See if we are on the ceiling.
+            if self.rect.y <= self.rect.height and self.change_y <= 0:
+                self.change_y = 0
+                self.rect.y = 0
 
     def jump(self):
         """ Called when user hits 'jump' button. """
@@ -80,13 +96,22 @@ class Player(pygame.sprite.Sprite):
         # move down a bit and see if there is a platform below us.
         # Move down 2 pixels because it doesn't work well if we only move down
         # 1 when working with a platform moving down.
-        self.rect.y += 2
-        platform_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
-        self.rect.y -= 2
+        if not self.reverse_gravity:
+            self.rect.y += 2
+            platform_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
+            self.rect.y -= 2
 
-        # If it is ok to jump, set our speed upwards
-        if len(platform_hit_list) > 0 or self.rect.bottom >= Game.SCREEN_HEIGHT:
-            self.change_y = -10
+            # If it is ok to jump, set our speed upwards
+            if len(platform_hit_list) > 0 or self.rect.bottom >= Game.SCREEN_HEIGHT:
+                self.change_y = -10
+        else:
+            self.rect.y -= 2
+            platform_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
+            self.rect.y += 2
+
+            # If it is ok to jump, set our speed upwards
+            if len(platform_hit_list) > 0 or self.rect.top <= 0:
+                self.change_y = 10
 
     # Player-controlled movement:
     def go_left(self):

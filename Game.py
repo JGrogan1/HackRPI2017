@@ -57,11 +57,22 @@ def run():
                 if event.key == pygame.K_UP:
                     player.jump()
                 if event.key == pygame.K_r:
+                    player.reverse_gravity = False
+                    player.image = pygame.image.load("resources/scientist.png")
                     clones.append([player.width(), player.height(), -current_level.world_shift + player.rect.x, player.rect.y])
                     current_level.reset(clones)
                 if event.key == pygame.K_ESCAPE:
+                    player.reverse_gravity = False
+                    player.image = pygame.image.load("resources/scientist.png")
                     clones.clear()
                     current_level.full_reset()
+                if event.key == pygame.K_2:
+                    if player.reverse_gravity:
+                        player.reverse_gravity = False
+                        player.image = pygame.image.load("resources/scientist.png")
+                    else:
+                        player.reverse_gravity = True
+                        player.image = pygame.image.load("resources/upside_down_scientist.png")
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT and player.change_x < 0:
