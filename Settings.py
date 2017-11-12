@@ -32,7 +32,7 @@ def run():
             if event.type == pygame.QUIT:
                 done = True
 
-            if event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(1):
+            if event.type == pygame.JOYBUTTONDOWN and (joysticks[0].get_button(0) or joysticks[0].get_button(1)):
                 done = True
                 continue_to_back = True
 
