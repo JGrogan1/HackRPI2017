@@ -47,6 +47,11 @@ class Level(object):
         self.spike_list.draw(screen)
         self.goal_list.draw(screen)
 
+        # Draw the lives counter
+        font = pygame.font.Font(None, 32)
+        lives = font.render("Lives Left: " + str(self.player.lives), 1, (255, 255, 255))
+        screen.blit(lives, (30, 20))
+
     def reset(self, clones):
         lives = self.player.lives
         if lives == 0:
@@ -141,7 +146,7 @@ class Level_01(Level):
 
         player.rect.x = 100
         player.rect.y = Game.SCREEN_HEIGHT - player.rect.height - 50
-        player.lives = 100
+        player.lives = 3
 
         Level.create(self, platforms, buttons, spikes, goal, clones)
 
