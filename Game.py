@@ -139,4 +139,4 @@ def run():
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 
-    Menu.main(.1)
+    Menu.main( pygame.mixer.music.get_volume())
