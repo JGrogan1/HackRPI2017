@@ -1,5 +1,6 @@
 import pygame
 import Game
+from Animation import *
 
 class Player(pygame.sprite.Sprite):
     """ This class represents the bar at the bottom that the player
@@ -14,7 +15,12 @@ class Player(pygame.sprite.Sprite):
 
         # Create an image of the block, and fill it with a color.
         # This could also be an image loaded from the disk.
-        self.image = pygame.image.load("resources/scientist.png")
+        # self.image = pygame.image.load("resources/scientist.png")
+        # TODO: fix the params for this
+        self.right_anim = Animation("resources/scientist.png", 20, 20, 2, 6)
+        self.left_anim = Animation("resources/scientist.png", 40, 40, 2, 6)
+        self.current_anim = self.right_anim
+        self.image = self.current_anim.get_current_frame()
 
         # Set a reference to the image rect.
         self.rect = self.image.get_rect()
@@ -27,6 +33,8 @@ class Player(pygame.sprite.Sprite):
         self.level = None
         self.lives = 0
         self.reverse_gravity = False
+
+        self.moving = False
 
     def update(self):
         """ Move the player. """
@@ -68,6 +76,10 @@ class Player(pygame.sprite.Sprite):
 
             # Stop our vertical movement
             self.change_y = 0
+
+        if self.moving:
+            self.current_anim.update()
+        self.image = self.current_anim.get_current_frame()
 
     def calc_grav(self):
         """ Calculate effect of gravity. """
@@ -116,15 +128,20 @@ class Player(pygame.sprite.Sprite):
     # Player-controlled movement:
     def go_left(self):
         """ Called when the user hits the left arrow. """
+        self.current_anim = self.left_anim
         self.change_x = -6
+        self.moving = True
 
     def go_right(self):
         """ Called when the user hits the right arrow. """
+        self.current_anim = self.right_anim
         self.change_x = 6
+        self.moving = True
 
     def stop(self):
         """ Called when the user lets off the keyboard. """
         self.change_x = 0
+        self.moving = False
 
     def width(self):
         return self.image.get_rect().size[0]
