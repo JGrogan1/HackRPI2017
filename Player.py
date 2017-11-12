@@ -36,6 +36,22 @@ class Player(pygame.sprite.Sprite):
 
         self.moving = False
 
+    def set_animation_gravity(self):
+        right = True
+        if self.current_anim != self.right_anim:
+            right = False
+        if not self.reverse_gravity:
+            self.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+            self.left_anim = Animation("resources/walking_left.png", 60, 100, 6, 6)
+        else:
+            self.right_anim = Animation("resources/upside_down_walking.png", 60, 100, 6, 6)
+            self.left_anim = Animation("resources/upside_down_walking_left.png", 60, 100, 6, 6)
+        if right:
+            self.current_anim = self.right_anim
+        else:
+            self.current_anim = self.left_anim
+        self.image = self.current_anim.get_current_frame()
+
     def update(self):
         """ Move the player. """
         # Gravity
