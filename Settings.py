@@ -16,6 +16,14 @@ def run():
     volume_pos = 200 + (880 * pygame.mixer.music.get_volume())
     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
 
+    """Controller init"""
+    joysticks = []
+    for i in range(0, pygame.joystick.get_count()):
+        joysticks.append(pygame.joystick.Joystick(i))
+        joysticks[i].init()
+        print("Detected joystick '", joysticks[i].get_name(), "'")
+
+
     done = False
     continue_to_back = False
 
@@ -24,13 +32,17 @@ def run():
             if event.type == pygame.QUIT:
                 done = True
 
+            if event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(1):
+                done = True
+                continue_to_back = True
+
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
                 if back_button.collidepoint(pos):
                     done = True
                     continue_to_back = True
 
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
+            if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (-1, 0)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT):
                 new_vol = pygame.mixer.music.get_volume() - 0.05
                 volume_bar = screen.blit(volume_bar_img, (100, Game.SCREEN_HEIGHT / 3))
                 if new_vol <= 0:
@@ -43,7 +55,7 @@ def run():
                     pygame.mixer.music.set_volume(new_vol)
                 print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
 
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
+            if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (1, 0)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT):
                 new_vol = pygame.mixer.music.get_volume() + 0.05
                 volume_bar = screen.blit(volume_bar_img, (100, Game.SCREEN_HEIGHT / 3))
                 if new_vol >= 1:
