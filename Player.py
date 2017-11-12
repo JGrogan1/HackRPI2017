@@ -17,8 +17,8 @@ class Player(pygame.sprite.Sprite):
         # This could also be an image loaded from the disk.
         # self.image = pygame.image.load("resources/scientist.png")
         # TODO: fix the params for this
-        self.right_anim = Animation("resources/scientist.png", 60, 100, 2, 6)
-        self.left_anim = Animation("resources/scientist.png", 60, 100, 2, 6)
+        self.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+        self.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
         self.current_anim = self.right_anim
         self.image = self.current_anim.get_current_frame()
 
