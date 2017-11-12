@@ -24,11 +24,10 @@ class Level(object):
     # Update everything on this level
     def update(self):
         """ Update everything in this level."""
-        self.platform_list.update()
         for button in self.button_list:
             button.update()
         self.button_list.update()
-
+        self.platform_list.update()
 
     def draw(self, screen):
         """ Draw everything on this level. """
@@ -79,19 +78,13 @@ class Level_01(Level):
         level = [[210, 70, 0, 600],
                  [210, 70, 200, 400],
                  [210, 70, 600, 300],
-                 ]
-        buttons = [[50, 580], [200, 400]]
+                 [210, 70, 800, 600]]
+
+        buttons = [([50, 580], level[3]), ([200, 400], level[2])]
 
         player.rect.x = 340
         player.rect.y = Game.SCREEN_HEIGHT - player.rect.height
         player.lives = 5
-
-        # Go through the array above and add platforms
-        for platform in level:
-            block = plat.Platform(platform[0], platform[1])
-            block.rect.x = platform[2]
-            block.rect.y = platform[3]
-            self.platform_list.add(block)
 
         # Adds clones that aren't part of the spawn point as platforms
         clone_list = pygame.sprite.Group()
@@ -105,8 +98,15 @@ class Level_01(Level):
         for clone in clone_list:
             self.platform_list.add(clone)
 
-        for button in buttons:
-            block = bt.Button(self.player, clone_list)
-            block.rect.x = button[0]
-            block.rect.y = button[1]
-            self.button_list.add(block)
+        # Go through the array above and add platforms
+        for platform in level:
+            block = plat.Platform(platform[0], platform[1])
+            block.rect.x = platform[2]
+            block.rect.y = platform[3]
+            self.platform_list.add(block)
+            for button in buttons:
+                if platform == button[1]:
+                    but = bt.Button(self.player, clone_list, block, self)
+                    but.rect.x = button[0][0]
+                    but.rect.y = button[0][1]
+                    self.button_list.add(but)
