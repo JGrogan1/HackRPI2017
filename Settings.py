@@ -30,4 +30,4 @@ def run():
     if continue_to_back:
         continue_to_back = False
         print("Clicked back button!")
-        Menu.main()
+        Menu.main(pygame.mixer.music.get_pos())
