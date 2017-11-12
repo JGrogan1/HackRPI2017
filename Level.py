@@ -1,5 +1,6 @@
 import pygame
 import Platform as plat
+import Clone
 import Spike as sp
 import Button as bt
 import Goal as gl
@@ -84,7 +85,7 @@ class Level(object):
         # Adds clones that aren't part of the spawn point as platforms
         clone_list = pygame.sprite.Group()
         for platform in clones:
-            block = plat.Platform(platform[0], platform[1])
+            block = Clone.Clone(platform[0], platform[1])
             block.rect.x = platform[2]
             block.rect.y = platform[3]
             clone_list.add(block)

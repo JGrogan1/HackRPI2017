@@ -24,3 +24,8 @@ class Animation(object):
 
     def get_current_frame(self):
         return self.current_frame
+
+    def reset(self):
+        self.current_tick = 0
+        self.frame_index = 0
+        self.current_frame = self.frames[0]

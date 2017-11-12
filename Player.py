@@ -156,6 +156,8 @@ class Player(pygame.sprite.Sprite):
     def stop(self):
         """ Called when the user lets off the keyboard. """
         self.change_x = 0
+        self.current_anim.reset()
+        self.image = self.current_anim.get_current_frame()
         self.moving = False
 
     def width(self):
