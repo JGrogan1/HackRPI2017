@@ -185,12 +185,12 @@ class Level_03(Level):
         # Array with width, height, x, and y of platform
         platforms = [[1000, Game.SCREEN_HEIGHT, -1000, 0],
                      [280, 160+160+80, 0, 0],
-                     [200, 140, 0, Game.SCREEN_HEIGHT - 140],
-                     [140, 140, 280, Game.SCREEN_HEIGHT - 140],
+                     [200, 160, 0, Game.SCREEN_HEIGHT - 140],
+                     [120, 120, 280, Game.SCREEN_HEIGHT - 120],
                      [120, 140, 280, 0],
                      [200, 120, 200+80+120+80, 0],
-                     [280, 90+160+140,200+80+140, 160+140],
-                     [1000, 160, 280, 155+160+90+155+20],
+                     [280, 90+160+140, 200+80+140, 160+140],
+                     [1000, 120, 280, 155+160+90+155+40],
                      [1000, Game.SCREEN_HEIGHT, 200+80+120+80+200, 0]]
 
         spikes = []
