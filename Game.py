@@ -23,8 +23,6 @@ def run():
     # Set the height and width of the screen
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    pygame.display.set_caption("Platformer Jumper")
-
     # Create the player
     player = pl.Player()
 

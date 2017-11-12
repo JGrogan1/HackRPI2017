@@ -4,7 +4,6 @@ import Menu
 
 def run():
     pygame.init()
-    pygame.display.set_caption("Settings")
 
     screen = pygame.display.set_mode((Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT))
 

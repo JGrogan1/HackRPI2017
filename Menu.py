@@ -11,7 +11,7 @@ def main(musicVol):
     # Set the height and width of the screen
     screen = pygame.display.set_mode((Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT))
 
-    pygame.display.set_caption("Menu")
+    pygame.display.set_caption("The Adventures of The Evil Mad Scientist: Dr. Citizano")
 
     # screen.blit(pygame.font.SysFont("Comic Sans MS", 40).render("Welcome Citizano!", 1, (255, 0, 0)), (200, 200))
     background_img = pygame.image.load("resources/title.png").convert()

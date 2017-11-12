@@ -58,8 +58,12 @@ class Level(object):
         lives = self.player.lives
         if lives == 0:
             return
+        size = len(self.platform_list.sprites())
         self.__init__(self.player, clones)
-        self.player.lives = lives - 1
+        if size != len(self.platform_list.sprites()):
+            self.player.lives = lives - 1
+        else :
+            self.player.lives = lives
 
     def shift_world(self, shift_x):
         """ When the user moves left/right and we need to scroll
