@@ -150,8 +150,8 @@ class Level01(Level):
         buttons = [([1410, Game.SCREEN_HEIGHT - 70], platforms[8])]
 
         spikes = []
-        for i in range(20):
-            spikes.append([1775+20*i, Game.SCREEN_HEIGHT - 100, False])
+        for i in range(22):
+            spikes.append([1760+20*i, Game.SCREEN_HEIGHT - 100, False])
 
         goal = [[100, 100, 2750, Game.SCREEN_HEIGHT - 150]]
 
