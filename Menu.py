@@ -4,6 +4,7 @@ import Settings
 
 def main():
     """ Main Program """
+    pygame.mixer.pre_init(44100, 16, 2, 4096)
     pygame.init()
 
     # Set the height and width of the screen
@@ -19,6 +20,11 @@ def main():
 
     start_button = screen.blit(start_img, (33, Game.SCREEN_HEIGHT / 2))
     settings_button = screen.blit(settings_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2))
+
+    pygame.mixer.music.load("resources/power.mp3")
+    pygame.mixer.music.set_volume(.1)
+    pygame.mixer.music.play(-1)
+
 
     done = False
     continue_to_start = False
