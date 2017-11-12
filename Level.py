@@ -19,7 +19,7 @@ class Level(object):
         self.player = player
 
         # Background image
-        self.background = pygame.image.load("resources/test.jpg")
+        self.background = pygame.image.load("resources/bg.png")
         self.rect = self.background.get_rect()
 
         self.world_shift = 0

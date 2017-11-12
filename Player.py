@@ -15,7 +15,6 @@ class Player(pygame.sprite.Sprite):
 
         # Create an image of the block, and fill it with a color.
         # This could also be an image loaded from the disk.
-        # self.image = pygame.image.load("resources/scientist.png")
         # TODO: fix the params for this
         self.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
         self.left_anim = Animation("resources/walking_left.png", 60, 100, 6, 6)
