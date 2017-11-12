@@ -9,10 +9,10 @@ def run():
     screen = pygame.display.set_mode((Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT))
 
     settings_img = pygame.image.load("resources/settings.png").convert()
-    back_img = pygame.image.load("resources/backButtonpng.png").convert()
+    back_img = pygame.image.load("resources/backButton.png").convert()
     volume_knob_img = pygame.image.load("resources/slider.png").convert()
     volume_knob_img.set_colorkey((255, 0, 255))
-    volume_bar_img = pygame.image.load("resources/volumeBar.png").convert()
+    volume_bar_img = pygame.image.load("resources/volume_bar.png").convert()
     volume_bar_img.set_colorkey((255, 0, 255))
 
     volume_pos = 120 + (880 * pygame.mixer.music.get_volume())
