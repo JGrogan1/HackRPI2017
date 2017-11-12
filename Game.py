@@ -1,6 +1,7 @@
 import pygame
 import Level as lvl
 import Player as pl
+import Menu
 
 # Colors
 GREEN = (0, 255, 0)
@@ -100,6 +101,9 @@ def run():
             player.image = pygame.image.load("resources/scientist.png")
             clones.clear()
             current_level_number += 1
+            if current_level_number >= len(level_list):
+                done = True
+                continue
             current_level = level_list[current_level_number]
             current_level.__init__(player)
             player.level = current_level
@@ -134,6 +138,4 @@ def run():
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 
-    # Be IDLE friendly. If you forget this line, the program will 'hang'
-    # on exit.
-    pygame.quit()
+    Menu.main()
