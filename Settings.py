@@ -57,7 +57,7 @@ def run():
                     volume_pos = 120 + (880 * new_vol)
                     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3 + 91))
                     pygame.mixer.music.set_volume(new_vol)
-                print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
+                #print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
 
             if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (1, 0)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT):
                 new_vol = pygame.mixer.music.get_volume() + 0.05
@@ -70,7 +70,7 @@ def run():
                     volume_pos = 120 + (880 * new_vol)
                     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3 + 91))
                     pygame.mixer.music.set_volume(new_vol)
-                print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
+                #print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
 
             pygame.display.flip()
 
