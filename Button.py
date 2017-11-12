@@ -1,6 +1,5 @@
 import pygame
 import Game
-import Platform as plat
 
 class Button(pygame.sprite.Sprite):
     """ Platform the user can jump on """

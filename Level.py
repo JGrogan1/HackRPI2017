@@ -2,6 +2,7 @@ import pygame
 import Platform as plat
 import Spike as sp
 import Button as bt
+import Goal as gl
 import Game
 
 class Level(object):
@@ -105,8 +106,7 @@ class Level(object):
             self.spike_list.add(block)
 
         for goal in goals:
-            block = plat.Platform(goal[0], goal[1])
-            block.image.fill(Game.YELLOW)
+            block = gl.Goal(goal[0], goal[1])
             block.rect.x = goal[2]
             block.rect.y = goal[3]
             self.goal_list.add(block)
