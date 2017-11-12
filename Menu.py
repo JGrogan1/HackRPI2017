@@ -1,8 +1,9 @@
 import pygame
 import Game
 import Settings
+from Music import Music
 
-def main():
+def main(musicVol):
     """ Main Program """
     pygame.mixer.pre_init(44100, 16, 2, 4096)
     pygame.init()
@@ -21,10 +22,7 @@ def main():
     start_button = screen.blit(start_img, (33, Game.SCREEN_HEIGHT / 2))
     settings_button = screen.blit(settings_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2))
 
-    pygame.mixer.music.load("resources/menu_loop.mp3")
-    pygame.mixer.music.set_volume(.100)
-    pygame.mixer.music.play(-1)
-
+    bgm = Music(musicVol)
 
     done = False
     continue_to_start = False
@@ -55,4 +53,4 @@ def main():
     pygame.quit()
 
 if __name__ == "__main__":
-    main()
+    main(.1)

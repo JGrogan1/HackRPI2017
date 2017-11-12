@@ -13,7 +13,7 @@ def run():
     back_button = screen.blit(back_img, (Game.SCREEN_WIDTH / 2 - 300, Game.SCREEN_HEIGHT / 2))
     volume_knob_img = pygame.image.load("resources/volume_knob.png").convert()
     volume_bar_img = pygame.image.load("resources/volume_bar.png")
-    volume_pos = 288
+    volume_pos = 200 + (880 * pygame.mixer.music.get_volume())
     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
 
     done = False
@@ -38,7 +38,7 @@ def run():
                     volume_pos = 200
                     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
                 else:
-                    volume_pos -= 44
+                    volume_pos = 200 + (880 * new_vol)
                     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
                     pygame.mixer.music.set_volume(new_vol)
                 print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
@@ -51,7 +51,7 @@ def run():
                     volume_pos = 1080
                     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
                 else:
-                    volume_pos += 44
+                    volume_pos = 200 + (880 * new_vol)
                     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
                     pygame.mixer.music.set_volume(new_vol)
                 print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
@@ -61,4 +61,4 @@ def run():
     if continue_to_back:
         continue_to_back = False
         print("Clicked back button!")
-        Menu.main()
+        Menu.main(pygame.mixer.music.get_volume())
