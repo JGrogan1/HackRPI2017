@@ -32,9 +32,10 @@ def run():
     level_list.append(lvl.Level_01(player))
     level_list.append(lvl.Level_02(player))
     level_list.append(lvl.Level_03(player))
+    level_list.append(lvl.Level_04(player))
 
     # Set the current level
-    current_level_number = 2
+    current_level_number = 3
     current_level = level_list[current_level_number]
 
     active_sprite_list = pygame.sprite.Group()
