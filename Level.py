@@ -201,5 +201,5 @@ class Level_03(Level):
         player.rect.y = Game.SCREEN_HEIGHT/2 - player.rect.height
         player.lives = 4
 
-        Level.create(self, platforms, [], spikes, goal, clones)
+        Level.create(self, platforms, [], spikes, goal, clones)  # no buttons
 
