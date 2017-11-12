@@ -13,7 +13,8 @@ def run():
     back_button = screen.blit(back_img, (Game.SCREEN_WIDTH / 2 - 300, Game.SCREEN_HEIGHT / 2))
     volume_knob_img = pygame.image.load("resources/volume_knob.png").convert()
     volume_bar_img = pygame.image.load("resources/volume_bar.png")
-    volume_pos = 200
+    volume_pos = 288
+    volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
 
     done = False
     continue_to_back = False
@@ -30,9 +31,8 @@ def run():
                     continue_to_back = True
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-                print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
                 new_vol = pygame.mixer.music.get_volume() - 0.05
-                volume_bar = screen.blit(volume_bar_img, (200, Game.SCREEN_HEIGHT / 3))
+                volume_bar = screen.blit(volume_bar_img, (100, Game.SCREEN_HEIGHT / 3))
                 if new_vol <= 0:
                     pygame.mixer.music.set_volume(0)
                     volume_pos = 200
@@ -41,11 +41,11 @@ def run():
                     volume_pos -= 44
                     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
                     pygame.mixer.music.set_volume(new_vol)
+                print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-                print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
                 new_vol = pygame.mixer.music.get_volume() + 0.05
-                volume_bar = screen.blit(volume_bar_img, (200, Game.SCREEN_HEIGHT / 3))
+                volume_bar = screen.blit(volume_bar_img, (100, Game.SCREEN_HEIGHT / 3))
                 if new_vol >= 1:
                     pygame.mixer.music.set_volume(1)
                     volume_pos = 1080
@@ -54,6 +54,7 @@ def run():
                     volume_pos += 44
                     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
                     pygame.mixer.music.set_volume(new_vol)
+                print("Current volume: %d percent" % ((100 * (pygame.mixer.music.get_volume()))))
 
             pygame.display.flip()
 
