@@ -185,7 +185,7 @@ class Level_03(Level):
         # Array with width, height, x, and y of platform
         platforms = [[1000, Game.SCREEN_HEIGHT, -1000, 0],
                      [280, 160+160+80, 0, 0],
-                     [200, 140, 0, Game.SCREEN_HEIGHT - 160],
+                     [200, 140, 0, Game.SCREEN_HEIGHT - 140],
                      [140, 140, 280, Game.SCREEN_HEIGHT - 140],
                      [120, 140, 280, 0],
                      [200, 120, 200+80+120+80, 0],
@@ -195,10 +195,10 @@ class Level_03(Level):
 
         spikes = []
         for i in range(4):
-            spikes.append([200 + 20 * i, 405, True])
+            spikes.append([200 + 20 * i, 400, True])
             spikes.append([200 + 20 * i, Game.SCREEN_HEIGHT - 50, False])
             spikes.append([400 + 20 * i, 0, True])
-            spikes.append([420 + 20 * i, 245, False])
+            spikes.append([420 + 20 * i, 250, False])
 
         goal = [[100, 100, Game.SCREEN_WIDTH-700, 160]]
 
