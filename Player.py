@@ -86,7 +86,7 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.change_y -= .35
             # See if we are on the ceiling.
-            if self.rect.y <= self.rect.height and self.change_y <= 0:
+            if self.rect.y <= 0 and self.change_y <= 0:
                 self.change_y = 0
                 self.rect.y = 0
 
