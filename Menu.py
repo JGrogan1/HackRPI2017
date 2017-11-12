@@ -21,7 +21,8 @@ def main():
     settings_button = screen.blit(settings_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2))
 
     done = False
-
+    continue_to_start = False
+    continue_to_settings = False
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -30,13 +31,20 @@ def main():
                 pos = pygame.mouse.get_pos()
                 if start_button.collidepoint(pos):
                     done = True
-                    print("Clicked start button!")
-                    Game.run()
+                    continue_to_start = True
                 if settings_button.collidepoint(pos):
                     done = True
-                    print("Clicked settings button!")
-                    Settings.run()
+                    continue_to_settings = True
         pygame.display.flip()
+
+    if continue_to_start:
+        continue_to_start = False
+        print("Clicked start button!")
+        Game.run()
+    if continue_to_settings:
+        continue_to_settings = False
+        print("Clicked settings button!")
+        Settings.run()
 
     pygame.quit()
 
