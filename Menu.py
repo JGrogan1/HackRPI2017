@@ -2,7 +2,7 @@ import pygame
 import Game
 import Settings
 
-def main():
+def main(music_time):
     """ Main Program """
     pygame.mixer.pre_init(44100, 16, 2, 4096)
     pygame.init()
@@ -23,7 +23,8 @@ def main():
 
     pygame.mixer.music.load("resources/power.mp3")
     pygame.mixer.music.set_volume(.1)
-    pygame.mixer.music.play(-1)
+    print ("Current msuic time: %d" % (music_time / 1000))
+    pygame.mixer.music.play(-1, music_time)
 
 
     done = False
@@ -55,4 +56,4 @@ def main():
     pygame.quit()
 
 if __name__ == "__main__":
-    main()
+    main(0)
