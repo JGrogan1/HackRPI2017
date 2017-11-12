@@ -1,4 +1,5 @@
 import pygame
+import HowTo
 import Game
 import Settings
 from Music import Music
@@ -19,7 +20,7 @@ def main(musicVol):
     settings_img = pygame.image.load("resources/settingsButton.png").convert()
     exit_img = pygame.image.load("resources/exitButton.png").convert()
     arrow_img = pygame.image.load("resources/menuArrow.png").convert()
-    arrow_img.set_colorkey((255,0,255))
+    arrow_img.set_colorkey((255, 0, 255))
     arrow_coverup_img = pygame.image.load("resources/buttonCover.png").convert()
 
     screen.blit(background_img, (0, 0))
@@ -68,15 +69,15 @@ def main(musicVol):
 
             if menu_selector == 0:
                 screen.blit(arrow_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2))
-                screen.blit(arrow_coverup_img,(Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2 + 125))
+                screen.blit(arrow_coverup_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2 + 125))
                 screen.blit(arrow_coverup_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2 + 250))
             if menu_selector == 1:
                 screen.blit(arrow_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2 + 125))
-                screen.blit(arrow_coverup_img,(Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2))
+                screen.blit(arrow_coverup_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2))
                 screen.blit(arrow_coverup_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2 + 250))
             if menu_selector == 2:
                 screen.blit(arrow_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2 + 250))
-                screen.blit(arrow_coverup_img,(Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2))
+                screen.blit(arrow_coverup_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2))
                 screen.blit(arrow_coverup_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2 + 125))
 
             if event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(0):
@@ -94,6 +95,7 @@ def main(musicVol):
 
     if continue_to_start:
         print("Clicked start button!")
+        HowTo.run()
         Game.run()
     if continue_to_settings:
         print("Clicked settings button!")
