@@ -42,7 +42,8 @@ class Level(object):
         screen.blit(self.background, self.rect)
 
         # Draw all the sprite lists that we have
-        self.platform_list.draw(screen)
+        for platform in self.platform_list:
+            screen.blit(platform.image, platform.rect, pygame.Rect(0, 0, platform.rect.width, platform.rect.height))
         self.button_list.draw(screen)
         self.spike_list.draw(screen)
         self.goal_list.draw(screen)
@@ -123,7 +124,10 @@ class Level_01(Level):
 
         # Array with width, height, x, and y of platform
         platforms = [[1000, Game.SCREEN_HEIGHT, -1000, 0],
-                     [5000, 60, 0, Game.SCREEN_HEIGHT - 50],
+                     [1000, 60, 0, Game.SCREEN_HEIGHT - 50],
+                     [1000, 60, 1000, Game.SCREEN_HEIGHT - 50],
+                     [1000, 60, 2000, Game.SCREEN_HEIGHT - 50],
+                     [1000, 60, 3000, Game.SCREEN_HEIGHT - 50],
                      [200, 100, 760, Game.SCREEN_HEIGHT - 140],
                      [200, 220, 1160, Game.SCREEN_HEIGHT - 260],
                      [200, 220, 1560, Game.SCREEN_HEIGHT - 260],
@@ -131,7 +135,7 @@ class Level_01(Level):
                      [200, 220, 2200, Game.SCREEN_HEIGHT - 260],
                      [1000, Game.SCREEN_HEIGHT, 3000, 0]]
 
-        buttons = [([1410, Game.SCREEN_HEIGHT - 70], platforms[5])]
+        buttons = [([1410, Game.SCREEN_HEIGHT - 70], platforms[8])]
 
         spikes = []
         for i in range(20):
@@ -158,7 +162,9 @@ class Level_02(Level):
         platforms = [[1000, Game.SCREEN_HEIGHT, -1000, 0],
                      [500, Game.SCREEN_HEIGHT / 2, 0, Game.SCREEN_HEIGHT / 2],
                      [500, Game.SCREEN_HEIGHT /2 , 2000, Game.SCREEN_HEIGHT / 2],
-                     [2500, 100, 0, Game.SCREEN_HEIGHT - 60],
+                     [1000, 100, 0, Game.SCREEN_HEIGHT - 60],
+                     [1000, 100, 1000, Game.SCREEN_HEIGHT - 60],
+                     [1000, 100, 2000, Game.SCREEN_HEIGHT - 60],
                      [1000, Game.SCREEN_HEIGHT, 2500, 0]]
 
         spikes = []

@@ -10,7 +10,5 @@ class Platform(pygame.sprite.Sprite):
             code. """
         super().__init__()
 
-        self.image = pygame.Surface([width, height])
-        self.image.fill(Game.GREEN)
-
-        self.rect = self.image.get_rect()
+        self.image = pygame.image.load("resources/dirt_texture.png").convert()
+        self.rect = pygame.Rect(0, 0, width, height)
