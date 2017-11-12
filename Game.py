@@ -7,6 +7,7 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 PINK = (255, 192, 203)
 GRAY = (128, 128, 128)
+YELLOW = (255, 255, 0)
 
 # Screen dimensions
 SCREEN_WIDTH = 1280
@@ -27,9 +28,11 @@ def run():
     # Create all the levels
     level_list = []
     level_list.append(lvl.Level_01(player))
+    level_list.append(lvl.Level_02(player))
 
     # Set the current level
-    current_level = level_list[0]
+    current_level_number = 0
+    current_level = level_list[current_level_number]
 
     active_sprite_list = pygame.sprite.Group()
     player.level = current_level
@@ -66,7 +69,7 @@ def run():
                     player.reverse_gravity = False
                     player.image = pygame.image.load("resources/scientist.png")
                     clones.clear()
-                    current_level.full_reset()
+                    current_level.__init__(player)
                 if event.key == pygame.K_2:
                     if player.reverse_gravity:
                         player.reverse_gravity = False
@@ -89,7 +92,18 @@ def run():
             player.reverse_gravity = False
             player.image = pygame.image.load("resources/scientist.png")
             clones.clear()
-            current_level.full_reset()
+            current_level.__init__(player)
+
+        goals = pygame.sprite.spritecollide(player, current_level.goal_list, False)
+        if len(goals) > 0:
+            player.reverse_gravity = False
+            player.image = pygame.image.load("resources/scientist.png")
+            clones.clear()
+            current_level_number += 1
+            current_level = level_list[current_level_number]
+            current_level.__init__(player)
+            player.level = current_level
+            continue
 
         # Update items in the level
         current_level.update()

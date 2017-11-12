@@ -27,10 +27,12 @@ class Button(pygame.sprite.Sprite):
         if collided or len(clone_collisions) != 0:
             self.image.fill(Game.PINK)
             if not self.removed:
+                self.platform.rect.x -= self.current_level.world_shift
                 self.current_level.platform_list.remove(self.platform)
                 self.removed = True
         else:
             self.image.fill(Game.RED)
             if self.removed:
+                self.platform.rect.x += self.current_level.world_shift
                 self.removed = False
                 self.current_level.platform_list.add(self.platform)

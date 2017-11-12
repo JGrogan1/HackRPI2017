@@ -14,6 +14,7 @@ class Level(object):
         self.platform_list = pygame.sprite.Group()
         self.button_list = pygame.sprite.Group()
         self.spike_list = pygame.sprite.Group()
+        self.goal_list = pygame.sprite.Group()
         self.player = player
 
         # Background image
@@ -30,6 +31,7 @@ class Level(object):
         self.button_list.update()
         self.platform_list.update()
         self.spike_list.update()
+        self.goal_list.update()
 
     def draw(self, screen):
         """ Draw everything on this level. """
@@ -41,6 +43,7 @@ class Level(object):
         self.platform_list.draw(screen)
         self.button_list.draw(screen)
         self.spike_list.draw(screen)
+        self.goal_list.draw(screen)
 
     def reset(self, clones):
         lives = self.player.lives
@@ -48,9 +51,6 @@ class Level(object):
             return
         self.__init__(self.player, clones)
         self.player.lives = lives - 1
-
-    def full_reset(self):
-        self.__init__(self.player)
 
     def shift_world(self, shift_x):
         """ When the user moves left/right and we need to scroll
@@ -69,33 +69,10 @@ class Level(object):
         for spike in self.spike_list:
             spike.rect.x += shift_x
 
+        for goal in self.goal_list:
+            goal.rect.x += shift_x
 
-# Create platforms for the level
-class Level_01(Level):
-    """ Definition for level 1. """
-
-    def __init__(self, player, clones=[]):
-        """ Create level 1. """
-
-        # Call the parent constructor
-        Level.__init__(self, player)
-
-        # Array with width, height, x, and y of platform
-        platforms = [[210, 70, 0, 600],
-                 [210, 70, 200, 400],
-                 [210, 70, 600, 300],
-                 [210, 70, 800, 600]]
-
-        buttons = [([50, 580], platforms[3]),
-                ([200, 400], platforms[2])]
-
-        spikes = [[95, 50, 600, 250],
-                  [95, 50, 700, 250]]
-
-        player.rect.x = 340
-        player.rect.y = Game.SCREEN_HEIGHT - player.rect.height
-        player.lives = 5
-
+    def create(self, platforms, buttons, spikes, goals, clones):
         # Adds clones that aren't part of the spawn point as platforms
         clone_list = pygame.sprite.Group()
         for platform in clones:
@@ -125,5 +102,76 @@ class Level_01(Level):
             block.image.fill(Game.GRAY)
             block.rect.x = spike[2]
             block.rect.y = spike[3]
-            block.player = self.player
             self.spike_list.add(block)
+
+        for goal in goals:
+            block = plat.Platform(goal[0], goal[1])
+            block.image.fill(Game.YELLOW)
+            block.rect.x = goal[2]
+            block.rect.y = goal[3]
+            self.goal_list.add(block)
+
+# Create platforms for the level
+class Level_01(Level):
+    """ Definition for level 1. """
+
+    def __init__(self, player, clones=[]):
+        """ Create level 1. """
+
+        # Call the parent constructor
+        Level.__init__(self, player)
+
+        # Array with width, height, x, and y of platform
+        platforms = [[1000, Game.SCREEN_HEIGHT, -1000, 0],
+                     [5000, 50, 0, Game.SCREEN_HEIGHT - 50],
+                     [200, 100, 750, Game.SCREEN_HEIGHT-150],
+                     [200, 225, 1150, Game.SCREEN_HEIGHT - 275],
+                     [200, 225, 1550, Game.SCREEN_HEIGHT - 275],
+                     [200, 225, 1550, Game.SCREEN_HEIGHT - 500],
+                     [200, 225, 2200, Game.SCREEN_HEIGHT - 275],
+                     [1000, Game.SCREEN_HEIGHT, 3000, 0]]
+
+        buttons = [([1400, Game.SCREEN_HEIGHT - 70], platforms[5])]
+
+        spikes = [[400, 50, 1775, Game.SCREEN_HEIGHT - 100]]
+
+        goal = [[100, 100, 200, Game.SCREEN_HEIGHT - 150]]
+
+        player.rect.x = 100
+        player.rect.y = Game.SCREEN_HEIGHT - player.rect.height - 50
+        player.lives = 100
+
+        Level.create(self, platforms, buttons, spikes, goal, clones)
+
+
+# Create platforms for the level
+class Level_02(Level):
+    """ Definition for level 1. """
+
+    def __init__(self, player, clones=[]):
+        """ Create level 1. """
+
+        # Call the parent constructor
+        Level.__init__(self, player)
+
+        # Array with width, height, x, and y of platform
+        platforms = [[200, Game.SCREEN_HEIGHT, -200, 0],
+                     [5000, 50, 0, Game.SCREEN_HEIGHT-50],
+                     [200, 100, 750, Game.SCREEN_HEIGHT-150],
+                     [200, 225, 1150, Game.SCREEN_HEIGHT - 275],
+                     [200, 225, 1550, Game.SCREEN_HEIGHT - 275],
+                     [200, 225, 1550, Game.SCREEN_HEIGHT - 500],
+                     [200, 225, 2200, Game.SCREEN_HEIGHT - 275],
+                     [200, 225, 2200, Game.SCREEN_HEIGHT - 275]]
+
+        buttons = [([1400, Game.SCREEN_HEIGHT - 70], platforms[5])]
+
+        spikes = [[400, 50, 1775, Game.SCREEN_HEIGHT - 100]]
+
+        goal = [[100, 100, 2750, Game.SCREEN_HEIGHT - 150]]
+
+        player.rect.x = 100
+        player.rect.y = Game.SCREEN_HEIGHT - player.rect.height - 50
+        player.lives = 100
+
+        Level.create(self, platforms, buttons, spikes, goal, clones)
