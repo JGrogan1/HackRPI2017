@@ -18,7 +18,7 @@ def main():
             if event.type == pygame.QUIT:
                 print ("Received event 'Quit', exiting.")
                 done = True
-            if event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(1):
+            if event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0):
                 print("Button pressed")
         pygame.display.flip()
 
