@@ -68,33 +68,21 @@ def run():
                     player.jump()
                 if event.key == pygame.K_r:
                     player.reverse_gravity = False
-                    player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-                    player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-                    player.current_anim = player.right_anim
-                    player.image = player.current_anim.get_current_frame()
+                    player.set_animation_gravity()
                     clones.append([player.width(), player.height(), -current_level.world_shift + player.rect.x, player.rect.y])
                     current_level.reset(clones)
                 if event.key == pygame.K_ESCAPE:
                     player.reverse_gravity = False
-                    player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-                    player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-                    player.current_anim = player.right_anim
-                    player.image = player.current_anim.get_current_frame()
+                    player.set_animation_gravity()
                     clones.clear()
                     current_level.__init__(player)
                 if event.key == pygame.K_2:
                     if player.reverse_gravity:
                         player.reverse_gravity = False
-                        player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-                        player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-                        player.current_anim = player.right_anim
-                        player.image = player.current_anim.get_current_frame()
+                        player.set_animation_gravity()
                     else:
                         player.reverse_gravity = True
-                        player.right_anim = Animation("resources/upside_down_walking.png", 60, 100, 6, 6)
-                        player.left_anim = Animation("resources/upside_down_walking.png", 60, 100, 6, 6)
-                        player.current_anim = player.right_anim
-                        player.image = player.current_anim.get_current_frame()
+                        player.set_animation_gravity()
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT and player.change_x < 0:
@@ -111,20 +99,14 @@ def run():
         spikes = pygame.sprite.spritecollide(player, current_level.spike_list, False)
         if len(spikes) > 0:
             player.reverse_gravity = False
-            player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-            player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-            player.current_anim = player.right_anim
-            player.image = player.current_anim.get_current_frame()
+            player.set_animation_gravity()
             clones.clear()
             current_level.__init__(player)
 
         goals = pygame.sprite.spritecollide(player, current_level.goal_list, False)
         if len(goals) > 0:
             player.reverse_gravity = False
-            player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-            player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
-            player.current_anim = player.right_anim
-            player.image = player.current_anim.get_current_frame()
+            player.set_animation_gravity()
             clones.clear()
             current_level_number += 1
             if current_level_number >= len(level_list):
