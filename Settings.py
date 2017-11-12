@@ -12,7 +12,7 @@ def run():
     back_img = pygame.image.load("resources/back.png").convert()
     back_button = screen.blit(back_img, (Game.SCREEN_WIDTH / 2 - 300, Game.SCREEN_HEIGHT / 2))
     volume_knob_img = pygame.image.load("resources/volume_knob.png").convert()
-    volume_bar_img = pygame.image.load("resources/volume_bar.png")
+    volume_bar_img = pygame.image.load("resources/volume_bar.png").convert()
     volume_pos = 200 + (880 * pygame.mixer.music.get_volume())
     volume_knob = screen.blit(volume_knob_img, (volume_pos, Game.SCREEN_HEIGHT / 3))
 
