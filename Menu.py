@@ -19,6 +19,7 @@ def main(musicVol):
     settings_img = pygame.image.load("resources/settingsButton.png").convert()
     exit_img = pygame.image.load("resources/exitButton.png").convert()
     arrow_img = pygame.image.load("resources/menuArrow.png").convert()
+    arrow_img.set_colorkey((255,0,255))
     arrow_coverup_img = pygame.image.load("resources/buttonCover.png").convert()
 
     bg = screen.blit(background_img, (0, 0))
@@ -61,11 +62,9 @@ def main(musicVol):
             if event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0, 1):
                 if(menu_selector > 0):
                     menu_selector -= 1
-                    print("%d"%menu_selector)
             if event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0, -1):
                 if(menu_selector < 2):
                     menu_selector += 1
-                    print("%d" % menu_selector)
 
             if menu_selector == 0:
                 screen.blit(arrow_img, (Game.SCREEN_WIDTH - 33 - 600 - 100, Game.SCREEN_HEIGHT / 2))

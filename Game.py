@@ -91,7 +91,7 @@ def run():
                 player.stop()
             if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0,0)) or (event.type == pygame.KEYUP and event.key == pygame.K_RIGHT):
                 player.stop()
-            if (event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(7)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_p):
+            if (event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(7)) or (event.type == pygame.KEYUP and event.key == pygame.K_p):
                 player.stop()
                 Pause.run()
 
