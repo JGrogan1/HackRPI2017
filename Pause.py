@@ -8,7 +8,7 @@ def run():
     screen = pygame.display.set_mode((Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT))
 
     pause_img = pygame.image.load("resources/pause.png").convert_alpha()
-    pause_screen = screen.blit(pause_img, (0,0))
+    screen.blit(pause_img, (0, 0))
 
     joysticks = []
     for i in range(0, pygame.joystick.get_count()):
@@ -21,11 +21,12 @@ def run():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-            if (event.type == pygame.JOYBUTTONUP and (joysticks[0].get_button(7) or joysticks[0].get_button(1))) or (event.type == pygame.KEYUP and event.key == pygame.K_p):
+            if (event.type == pygame.JOYBUTTONDOWN and (joysticks[0].get_button(7) or joysticks[0].get_button(1))) or (event.type == pygame.KEYUP and event.key == pygame.K_p):
                 done = True
-            if (event.type == pygame.JOYBUTTONDOWN and joysticks(0).get_button(6)) or (event.type == pygame.KEYUP and event.key == pygame.K_BACKSPACE):
+            elif (event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(6)) or (event.type == pygame.KEYUP and event.key == pygame.K_BACKSPACE):
                 done = True
                 go_to_menu = True
         pygame.display.flip()
     if go_to_menu:
-        Menu.main(pygame.mixer.music.get_volume())
+        return True
+    return False
