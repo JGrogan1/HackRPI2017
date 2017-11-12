@@ -33,7 +33,6 @@ def run():
     level_list.append(lvl.Level_01(player))
     level_list.append(lvl.Level_02(player))
     level_list.append(lvl.Level_03(player))
-    level_list.append(lvl.Level_04(player))
 
     # Set the current level
     current_level_number = 0

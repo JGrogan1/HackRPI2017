@@ -1,5 +1,6 @@
 import pygame
 import Platform as plat
+import Spike as sp
 import Button as bt
 import Game
 
@@ -98,10 +99,9 @@ class Level(object):
                     self.button_list.add(but)
 
         for spike in spikes:
-            block = plat.Platform(spike[0], spike[1])
-            block.image.fill(Game.GRAY)
-            block.rect.x = spike[2]
-            block.rect.y = spike[3]
+            block = sp.Spike()
+            block.rect.x = spike[0]
+            block.rect.y = spike[1]
             self.spike_list.add(block)
 
         for goal in goals:
@@ -133,7 +133,9 @@ class Level_01(Level):
 
         buttons = [([1400, Game.SCREEN_HEIGHT - 70], platforms[5])]
 
-        spikes = [[400, 50, 1775, Game.SCREEN_HEIGHT - 100]]
+        spikes = []
+        for i in range(20):
+            spikes.append([1775+20*i, Game.SCREEN_HEIGHT-100])
 
         goal = [[100, 100, 2750, Game.SCREEN_HEIGHT - 150]]
 
@@ -143,58 +145,25 @@ class Level_01(Level):
 
         Level.create(self, platforms, buttons, spikes, goal, clones)
 
-
-# Create platforms for the level
 class Level_02(Level):
-    """ Definition for level 1. """
+    """ Definition for level 2. """
 
     def __init__(self, player, clones=[]):
-        """ Create level 1. """
-
-        # Call the parent constructor
-        Level.__init__(self, player)
-
-        # Array with width, height, x, and y of platform
-        platforms = [[200, Game.SCREEN_HEIGHT, -200, 0],
-                     [5000, 50, 0, Game.SCREEN_HEIGHT-50],
-                     [200, 100, 750, Game.SCREEN_HEIGHT-150],
-                     [200, 225, 1150, Game.SCREEN_HEIGHT - 275],
-                     [200, 225, 1550, Game.SCREEN_HEIGHT - 275],
-                     [200, 225, 1550, Game.SCREEN_HEIGHT - 500],
-                     [200, 225, 2200, Game.SCREEN_HEIGHT - 275],
-                     [200, 225, 2200, Game.SCREEN_HEIGHT - 275]]
-
-        buttons = [([1400, Game.SCREEN_HEIGHT - 70], platforms[5])]
-
-        spikes = [[400, 50, 1775, Game.SCREEN_HEIGHT - 100]]
-
-        goal = [[100, 100, 2750, Game.SCREEN_HEIGHT - 150]]
-
-        player.rect.x = 100
-        player.rect.y = Game.SCREEN_HEIGHT - player.rect.height - 50
-        player.lives = 100
-
-        Level.create(self, platforms, buttons, spikes, goal, clones)
-
-class Level_03(Level):
-    """ Definition for level 1. """
-
-    def __init__(self, player, clones=[]):
-        """ Create level 1. """
+        """ Create level 2. """
 
         # Call the parent constructor
         Level.__init__(self, player)
 
         # Array with width, height, x, and y of platform
         platforms = [[1000, Game.SCREEN_HEIGHT, -1000, 0],
-                     [500, Game.SCREEN_HEIGHT/2,0,Game.SCREEN_HEIGHT/2],
-                     [500,Game.SCREEN_HEIGHT/2,2000,Game.SCREEN_HEIGHT/2],
-                     [2500,100,0,Game.SCREEN_HEIGHT-50],
+                     [500, Game.SCREEN_HEIGHT/2, 0, Game.SCREEN_HEIGHT/2],
+                     [500, Game.SCREEN_HEIGHT/2, 2000, Game.SCREEN_HEIGHT/2],
+                     [2500, 100, 0, Game.SCREEN_HEIGHT-50],
                      [1000, Game.SCREEN_HEIGHT, 2500, 0]]
 
-
-
-        spikes = [[1500, 50, 500, Game.SCREEN_HEIGHT - 100]]
+        spikes = []
+        for i in range(75):
+            spikes.append([500 + 20 * i, Game.SCREEN_HEIGHT - 100])
 
         goal = [[100, 100, 2250, Game.SCREEN_HEIGHT/2-100]]
 
@@ -204,11 +173,11 @@ class Level_03(Level):
 
         Level.create(self, platforms, [], spikes, goal, clones)  # no buttons
 
-class Level_04(Level):
-    """ Definition for level 1. """
+class Level_03(Level):
+    """ Definition for level 3. """
 
     def __init__(self, player, clones=[]):
-        """ Create level 1. """
+        """ Create level 3. """
 
         # Call the parent constructor
         Level.__init__(self, player)
@@ -218,16 +187,19 @@ class Level_04(Level):
                      [280, 160+155+90, 0, 0],
                      [200, 140, 0, Game.SCREEN_HEIGHT-160],
                      [140, 140, 280, Game.SCREEN_HEIGHT-140],
-                     [120,140,280,0],
-                     [200,120,200+80+120+80,0],
-                     [280,90+155+140,200+80+140,160+135],
-                     [1000,160, 280, 155+160+90+155+20],
-                     [1000,Game.SCREEN_HEIGHT,200+80+120+80+200,0]]
+                     [120, 140, 280, 0],
+                     [200, 120, 200+80+120+80, 0],
+                     [280, 90+155+140,200+80+140, 160+135],
+                     [1000, 160, 280, 155+160+90+155+20],
+                     [1000, Game.SCREEN_HEIGHT, 200+80+120+80+200, 0]]
 
-        spikes = [[80, 50, 200, 160+155+90],
-                  [80,50,200,Game.SCREEN_HEIGHT-50],
-                  [80,50,200+80+120,0],
-                  [80, 50, 200 + 80 + 120 +20, 265-20]]
+        spikes = []
+        for i in range(4):
+            spikes.append([200 + 20 * i, 405])
+            spikes.append([200 + 20 * i, Game.SCREEN_HEIGHT - 50])
+            spikes.append([400 + 20 * i, 0])
+            spikes.append([420 + 20 * i, 245])
+
 
         goal = [[100, 100, Game.SCREEN_WIDTH-700, 170]]
 
