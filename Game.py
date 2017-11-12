@@ -69,9 +69,12 @@ def run():
             if (event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(0)) or (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0, 1)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_UP):
                 player.jump()
             if (event.type == pygame.JOYBUTTONDOWN and (joysticks[0].get_button(1) or joysticks[0].get_button(2))) or (event.type == pygame.KEYDOWN and event.key == pygame.K_r):
+                right = True
+                if player.current_anim != player.right_anim:
+                    right = False
+                clones.append([player.width(), player.height(), -current_level.world_shift + player.rect.x, player.rect.y, right, player.reverse_gravity])
                 player.reverse_gravity = False
                 player.set_animation_gravity()
-                clones.append([player.width(), player.height(), -current_level.world_shift + player.rect.x, player.rect.y])
                 current_level.reset(clones)
             if (event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(6)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 player.reverse_gravity = False

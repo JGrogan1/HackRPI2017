@@ -63,7 +63,7 @@ class Level(object):
         self.__init__(self.player, clones)
         if size != len(self.platform_list.sprites()):
             self.player.lives = lives - 1
-        else :
+        else:
             self.player.lives = lives
 
     def shift_world(self, shift_x):
@@ -90,7 +90,7 @@ class Level(object):
         # Adds clones that aren't part of the spawn point as platforms
         clone_list = pygame.sprite.Group()
         for platform in clones:
-            block = Clone.Clone()
+            block = Clone.Clone(platform[4], platform[5])
             block.rect.x = platform[2]
             block.rect.y = platform[3]
             clone_list.add(block)
