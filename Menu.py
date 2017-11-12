@@ -13,20 +13,25 @@ def main(musicVol):
 
     pygame.display.set_caption("Menu")
 
-    screen.fill((0, 105, 255))
-    screen.blit(pygame.font.SysFont("Comic Sans MS", 40).render("Welcome Citizano!", 1, (255, 0, 0)), (200, 200))
+    background_img = pygame.image.load("resources/title.png").convert()
+    #screen.blit(pygame.font.SysFont("Comic Sans MS", 40).render("Welcome Citizano!", 1, (255, 0, 0)), (200, 200))
     """Render buttons here"""
-    start_img = pygame.image.load("resources/start_game.png").convert()
-    settings_img = pygame.image.load("resources/settings.png").convert()
+    start_img = pygame.image.load("resources/playButton.png").convert()
+    settings_img = pygame.image.load("resources/settingsButton.png").convert()
+    exit_img = pygame.image.load("resources/exitButton.png").convert()
 
-    start_button = screen.blit(start_img, (33, Game.SCREEN_HEIGHT / 2))
-    settings_button = screen.blit(settings_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2))
+    bg = screen.blit(background_img, (0, 0))
+    start_button = screen.blit(start_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2))
+    settings_button = screen.blit(settings_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2 + 124))
+    exit_button = screen.blit(exit_img, (Game.SCREEN_WIDTH - 33 - 600, Game.SCREEN_HEIGHT / 2 + 250))
+
 
     bgm = Music(musicVol)
 
     done = False
     continue_to_start = False
     continue_to_settings = False
+    exit_game = False
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -39,6 +44,9 @@ def main(musicVol):
                 if settings_button.collidepoint(pos):
                     done = True
                     continue_to_settings = True
+                if exit_button.collidepoint(pos):
+                    done = True
+                    exit_game = True
         pygame.display.flip()
 
     if continue_to_start:
@@ -49,6 +57,9 @@ def main(musicVol):
         continue_to_settings = False
         print("Clicked settings button!")
         Settings.run()
+    if exit_game:
+        exit_game = False
+        print("Goodbye!")
 
     pygame.quit()
 
