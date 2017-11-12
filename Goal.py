@@ -1,6 +1,6 @@
 import pygame
 import Game
-
+from Animation import *
 
 class Goal(pygame.sprite.Sprite):
 
@@ -12,6 +12,12 @@ class Goal(pygame.sprite.Sprite):
             code. """
         super().__init__()
 
-        self.image = pygame.Surface([width, height])
-        self.image.fill(Game.YELLOW)
+        self.anim = Animation("resources/flask.png", 100, 100, 5, 6)
+        self.image = self.anim.get_current_frame()
+
+        # Set a reference to the image rect.
         self.rect = self.image.get_rect()
+
+    def update(self):
+        self.anim.update()
+        self.image = self.anim.get_current_frame()
