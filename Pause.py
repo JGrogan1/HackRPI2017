@@ -21,9 +21,9 @@ def run():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-            if (event.type == pygame.JOYBUTTONDOWN and (joysticks[0].get_button(7) or joysticks[0].get_button(1))) or (event.type == pygame.KEYDOWN and event.key == pygame.K_p):
+            if (event.type == pygame.JOYBUTTONUP and (joysticks[0].get_button(7) or joysticks[0].get_button(1))) or (event.type == pygame.KEYUP and event.key == pygame.K_p):
                 done = True
-            if (event.type == pygame.JOYBUTTONDOWN and joysticks(0).get_button(6)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE):
+            if (event.type == pygame.JOYBUTTONDOWN and joysticks(0).get_button(6)) or (event.type == pygame.KEYUP and event.key == pygame.K_BACKSPACE):
                 done = True
                 go_to_menu = True
         pygame.display.flip()
