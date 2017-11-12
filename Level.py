@@ -135,7 +135,7 @@ class Level_01(Level):
 
         spikes = [[400, 50, 1775, Game.SCREEN_HEIGHT - 100]]
 
-        goal = [[100, 100, 200, Game.SCREEN_HEIGHT - 150]]
+        goal = [[100, 100, 2750, Game.SCREEN_HEIGHT - 150]]
 
         player.rect.x = 100
         player.rect.y = Game.SCREEN_HEIGHT - player.rect.height - 50
