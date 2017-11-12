@@ -139,4 +139,4 @@ def run():
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 
-    Menu.main()
+    Menu.main(.1)

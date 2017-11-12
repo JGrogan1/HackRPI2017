@@ -9,4 +9,5 @@ class SpriteSheet(object):
     def get_sprite(self, x, y):
         image = pygame.Surface([self.sprite_width, self.sprite_height]).convert()
         image.blit(self.sheet, (0, 0), (x * self.sprite_width, y * self.sprite_height, self.sprite_width, self.sprite_height))
+        image.set_colorkey((255, 0, 255))
         return image
