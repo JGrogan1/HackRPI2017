@@ -189,6 +189,7 @@ class Level_03(Level):
         platforms = [[1000, Game.SCREEN_HEIGHT, -1000, 0],
                      [500, Game.SCREEN_HEIGHT/2,0,Game.SCREEN_HEIGHT/2],
                      [500,Game.SCREEN_HEIGHT/2,2000,Game.SCREEN_HEIGHT/2],
+                     [2500,100,0,Game.SCREEN_HEIGHT-50],
                      [1000, Game.SCREEN_HEIGHT, 2500, 0]]
 
 
@@ -203,3 +204,35 @@ class Level_03(Level):
 
         Level.create(self, platforms, [], spikes, goal, clones)  # no buttons
 
+class Level_04(Level):
+    """ Definition for level 1. """
+
+    def __init__(self, player, clones=[]):
+        """ Create level 1. """
+
+        # Call the parent constructor
+        Level.__init__(self, player)
+
+        # Array with width, height, x, and y of platform
+        platforms = [[1000, Game.SCREEN_HEIGHT, -1000, 0],
+                     [280, 160+155+90, 0, 0],
+                     [200, 140, 0, Game.SCREEN_HEIGHT-160],
+                     [140, 140, 280, Game.SCREEN_HEIGHT-140],
+                     [120,140,280,0],
+                     [200,120,200+80+120+80,0],
+                     [280,90+155+140,200+80+140,160+135],
+                     [1000,160, 280, 155+160+90+155+20],
+                     [1000,Game.SCREEN_HEIGHT,200+80+120+80+200,0]]
+
+        spikes = [[80, 50, 200, 160+155+90],
+                  [80,50,200,Game.SCREEN_HEIGHT-50],
+                  [80,50,200+80+120,0],
+                  [80, 50, 200 + 80 + 120 +20, 265-20]]
+
+        goal = [[100, 100, Game.SCREEN_WIDTH-700, 170]]
+
+        player.rect.x = 60
+        player.rect.y = Game.SCREEN_HEIGHT - 160 - player.rect.height
+        player.lives = 3
+
+        Level.create(self, platforms, [], spikes, goal, clones)  # no buttons

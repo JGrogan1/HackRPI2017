@@ -2,6 +2,8 @@ import pygame
 import Level as lvl
 import Player as pl
 import Menu
+import Pause
+from Animation import *
 
 # Colors
 GREEN = (0, 255, 0)
@@ -31,9 +33,10 @@ def run():
     level_list.append(lvl.Level_01(player))
     level_list.append(lvl.Level_02(player))
     level_list.append(lvl.Level_03(player))
+    level_list.append(lvl.Level_04(player))
 
     # Set the current level
-    current_level_number = 2
+    current_level_number = 0
     current_level = level_list[current_level_number]
 
     active_sprite_list = pygame.sprite.Group()
@@ -49,47 +52,58 @@ def run():
     # All clones
     clones = []
 
-    joysticks = []
-    for i in range(0, pygame.joystick.get_count()):
-        joysticks.append(pygame.joystick.Joystick(i))
-        joysticks[i].init()
-        print("Detected joystick '", joysticks[i].get_name(), "'")
-
     # -------- Main Program Loop -----------
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+                pygame.quit()
 
-            if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (-1, 0)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT):
-                player.go_left()
-            if (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (1, 0)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT):
-                player.go_right()
-            if (event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(0)) or (event.type == pygame.JOYHATMOTION and joysticks[0].get_hat(0) == (0, 1)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_UP):
-                player.jump()
-            if (event.type == pygame.JOYBUTTONDOWN and (joysticks[0].get_button(1) or joysticks[0].get_button(2))) or (event.type == pygame.KEYDOWN and event.key == pygame.K_r):
-                player.reverse_gravity = False
-                player.image = pygame.image.load("resources/scientist.png")
-                clones.append([player.width(), player.height(), -current_level.world_shift + player.rect.x, player.rect.y])
-                current_level.reset(clones)
-            if (event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(6)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-                player.reverse_gravity = False
-                player.image = pygame.image.load("resources/scientist.png")
-                clones.clear()
-                current_level.__init__(player)
-            if (event.type == pygame.JOYBUTTONDOWN and joysticks[0].get_button(3)) or (event.type == pygame.KEYDOWN and event.key == pygame.K_2):
-                if player.reverse_gravity:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    player.go_left()
+                if event.key == pygame.K_RIGHT:
+                    player.go_right()
+                if event.key == pygame.K_UP:
+                    player.jump()
+                if event.key == pygame.K_r:
                     player.reverse_gravity = False
-                    player.image = pygame.image.load("resources/scientist.png")
-                else:
-                    player.reverse_gravity = True
-                    player.image = pygame.image.load("resources/upside_down_scientist.png")
+                    player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+                    player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+                    player.current_anim = player.right_anim
+                    player.image = player.current_anim.get_current_frame()
+                    clones.append([player.width(), player.height(), -current_level.world_shift + player.rect.x, player.rect.y])
+                    current_level.reset(clones)
+                if event.key == pygame.K_ESCAPE:
+                    player.reverse_gravity = False
+                    player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+                    player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+                    player.current_anim = player.right_anim
+                    player.image = player.current_anim.get_current_frame()
+                    clones.clear()
+                    current_level.__init__(player)
+                if event.key == pygame.K_2:
+                    if player.reverse_gravity:
+                        player.reverse_gravity = False
+                        player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+                        player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+                        player.current_anim = player.right_anim
+                        player.image = player.current_anim.get_current_frame()
+                    else:
+                        player.reverse_gravity = True
+                        player.right_anim = Animation("resources/upside_down_walking.png", 60, 100, 6, 6)
+                        player.left_anim = Animation("resources/upside_down_walking.png", 60, 100, 6, 6)
+                        player.current_anim = player.right_anim
+                        player.image = player.current_anim.get_current_frame()
 
-            if ((event.type == pygame.JOYHATMOTION and (joysticks[0].get_hat(0) == (0, 0))) or (event.type == pygame.KEYUP and event.key == pygame.K_LEFT)) and player.change_x < 0:
-                player.stop()
-            if ((event.type == pygame.JOYHATMOTION and (joysticks[0].get_hat(0) == (0, 0))) or (event.type == pygame.KEYUP and event.key == pygame.K_RIGHT)) and player.change_x > 0:
-                player.stop()
-
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT and player.change_x < 0:
+                    player.stop()
+                if event.key == pygame.K_RIGHT and player.change_x > 0:
+                    player.stop()
+                if event.key == pygame.K_p:
+                    player.stop()
+                    Pause.run()
 
         # Update the player.
         active_sprite_list.update()
@@ -97,14 +111,20 @@ def run():
         spikes = pygame.sprite.spritecollide(player, current_level.spike_list, False)
         if len(spikes) > 0:
             player.reverse_gravity = False
-            player.image = pygame.image.load("resources/scientist.png")
+            player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+            player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+            player.current_anim = player.right_anim
+            player.image = player.current_anim.get_current_frame()
             clones.clear()
             current_level.__init__(player)
 
         goals = pygame.sprite.spritecollide(player, current_level.goal_list, False)
         if len(goals) > 0:
             player.reverse_gravity = False
-            player.image = pygame.image.load("resources/scientist.png")
+            player.right_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+            player.left_anim = Animation("resources/walking.png", 60, 100, 6, 6)
+            player.current_anim = player.right_anim
+            player.image = player.current_anim.get_current_frame()
             clones.clear()
             current_level_number += 1
             if current_level_number >= len(level_list):
@@ -144,4 +164,4 @@ def run():
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 
-    Menu.main(.1)
+    Menu.main(pygame.mixer.music.get_volume())
