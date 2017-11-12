@@ -27,6 +27,9 @@ def run():
     # Create the player
     player = pl.Player()
 
+    # All clones
+    clones = []
+
     # Create all the levels
     level_list = []
     level_list.append(lvl.Level01(player))
@@ -36,6 +39,7 @@ def run():
     # Set the current level
     current_level_number = 0
     current_level = level_list[current_level_number]
+    current_level.__init__(player)
 
     active_sprite_list = pygame.sprite.Group()
     player.level = current_level
@@ -47,8 +51,6 @@ def run():
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
 
-    # All clones
-    clones = []
 
     joysticks = []
     for i in range(0, pygame.joystick.get_count()):
