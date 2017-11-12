@@ -2,6 +2,7 @@ import pygame
 import Level as lvl
 import Player as pl
 import Menu
+import Pause
 
 # Colors
 GREEN = (0, 255, 0)
@@ -54,6 +55,7 @@ def run():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+                pygame.quit()
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
@@ -85,6 +87,9 @@ def run():
                     player.stop()
                 if event.key == pygame.K_RIGHT and player.change_x > 0:
                     player.stop()
+                if event.key == pygame.K_p:
+                    player.stop()
+                    Pause.run()
 
         # Update the player.
         active_sprite_list.update()
@@ -139,4 +144,4 @@ def run():
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 
-    Menu.main( pygame.mixer.music.get_volume())
+    Menu.main(pygame.mixer.music.get_volume())
