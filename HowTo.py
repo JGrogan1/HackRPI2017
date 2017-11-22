@@ -11,6 +11,12 @@ def run():
     image = pygame.image.load("resources/howto.png").convert()
     rect = image.get_rect()
     screen.blit(image, rect)
+
+    joysticks = []
+    for i in range(0, pygame.joystick.get_count()):
+        joysticks.append(pygame.joystick.Joystick(i))
+        joysticks[i].init()
+        print("Detected joystick '", joysticks[i].get_name(), "'")
     done = False
     while not done:
         for event in pygame.event.get():
